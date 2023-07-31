@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FieldAppSDK } from "@contentful/app-sdk";
 import { useSDK } from "@contentful/react-apps-toolkit";
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs";
-import "prismjs/components/prism-css";
-import "prismjs/themes/prism.css";
+import Editor from "@monaco-editor/react";
 
 const CONTENT_FIELD_ID = "css";
 
@@ -24,16 +21,12 @@ const Field = () => {
   return (
     <>
       <Editor
-        value={css}
-        onValueChange={(css) => {
-          setCss(css);
-          contentField.setValue(css);
-        }}
-        highlight={(css) => highlight(css, languages.css, "css")}
-        padding={10}
-        style={{
-          fontFamily: '"Fira code", "Fira Mono", monospace',
-          fontSize: 14,
+        height="100vh"
+        defaultValue={css}
+        defaultLanguage="css"
+        onChange={(value, event) => {
+          setCss(value);
+          contentField.setValue(value);
         }}
       />
     </>
